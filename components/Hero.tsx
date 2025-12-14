@@ -16,6 +16,7 @@ const Hero: React.FC = () => {
 
     // SUBSTITUI imagem quebrada
     { src: "/developer.png" },
+    { src: "/neto-dev.png" },
 
     // LOGO EM DESTAQUE
     { src: "/logo.png", type: 'logo' },
