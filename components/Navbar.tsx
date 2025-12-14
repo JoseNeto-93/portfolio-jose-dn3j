@@ -36,15 +36,20 @@ const Navbar: React.FC = () => {
         <a
           href="#"
           onClick={(e) => handleNavigate(e, 'home')}
-          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+          className="relative flex items-center group"
         >
           <img
             src="/logo.png"
             alt="Logo DN3J"
-            className="h-14 w-auto object-contain"
+            className="h-14 w-14 object-contain rounded-xl transition-transform duration-300 group-hover:scale-105"
           />
 
-          <span className="text-2xl font-serif font-bold text-cream tracking-tighter">
+          {/* Texto no hover */}
+          <span
+            className="absolute left-full ml-3 whitespace-nowrap text-cream text-xl font-serif font-bold tracking-tight
+                       opacity-0 translate-x-[-6px] transition-all duration-300
+                       group-hover:opacity-100 group-hover:translate-x-0"
+          >
             DN3J.
           </span>
         </a>
@@ -108,3 +113,4 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
