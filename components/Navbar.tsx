@@ -41,22 +41,13 @@ const Navbar: React.FC = () => {
             Se falhar, o onError tenta /logo.png.
             Se falhar novamente, exibe o texto DN3J.
           */}
-          {!logoError ? (
-            <img 
-              src="/public/logo.png" 
-              alt="DN3J Sistemas" 
-              className="h-14 w-auto object-contain"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                // Previne loop infinito verificando se já tentamos o fallback
-                if (target.src.includes('public/logo.png')) {
-                  target.src = '/logo.png';
-                } else {
-                  setLogoError(true);
-                }
-              }}
+   
+          <img
+            src="/logo.png"
+            alt="Logo DN3J"
+            className="h-14 w-auto object-contain"
             />
-          ) : (
+
             <span className="text-2xl font-serif font-bold text-cream tracking-tighter">
               DN3J.
             </span>
