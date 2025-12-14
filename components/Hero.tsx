@@ -15,10 +15,10 @@ const Hero: React.FC = () => {
     { src: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=600&h=800" },
 
     // SUBSTITUI imagem quebrada
-    { src: "/carousel/developer.png" },
+    { src: "/developer.png" },
 
     // LOGO EM DESTAQUE
-    { src: "/carousel/logo-dn3j.png", type: 'logo' },
+    { src: "/logo.png", type: 'logo' },
   ];
 
   const [rotation, setRotation] = useState(0);
