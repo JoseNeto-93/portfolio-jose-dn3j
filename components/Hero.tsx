@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
     { src: "/Interview.jpg" },
     { src: "/Lenguajes.jpg" },
     { src: "/Programming.jpg" },
-    { src: "/hello.jpg" },
+    
  
 
     // SUBSTITUI imagem quebrada
