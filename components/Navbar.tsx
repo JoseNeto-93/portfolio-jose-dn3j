@@ -9,12 +9,12 @@ const navItems = [
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -27,31 +27,26 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav 
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 md:px-12 bg-black/20 backdrop-blur-sm border-b border-white/5`}
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <a 
-          href="#" 
+        
+        {/* Logo */}
+        <a
+          href="#"
           onClick={(e) => handleNavigate(e, 'home')}
-          className="hover:opacity-80 transition-opacity flex items-center"
+          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
         >
-          {/* 
-            Tenta carregar a imagem via /public/logo.png.
-            Se falhar, o onError tenta /logo.png.
-            Se falhar novamente, exibe o texto DN3J.
-          */}
-   
           <img
             src="/logo.png"
             alt="Logo DN3J"
             className="h-14 w-auto object-contain"
-            />
+          />
 
-            <span className="text-2xl font-serif font-bold text-cream tracking-tighter">
-              DN3J.
-            </span>
-          )}
+          <span className="text-2xl font-serif font-bold text-cream tracking-tighter">
+            DN3J.
+          </span>
         </a>
 
         {/* Desktop Menu */}
@@ -66,6 +61,7 @@ const Navbar: React.FC = () => {
               {item.label}
             </a>
           ))}
+
           <a
             href="#"
             onClick={(e) => handleNavigate(e, 'contact')}
@@ -76,7 +72,7 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           className="md:hidden p-2 text-cream"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
@@ -84,7 +80,7 @@ const Navbar: React.FC = () => {
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="absolute top-full left-0 right-0 bg-[#0a0a0a] border-t border-white/10 p-6 flex flex-col space-y-4 md:hidden shadow-xl glass-panel">
           {navItems.map((item) => (
@@ -97,10 +93,11 @@ const Navbar: React.FC = () => {
               {item.label}
             </a>
           ))}
-           <a
+
+          <a
             href="#"
             onClick={(e) => handleNavigate(e, 'contact')}
-            className="text-lg font-serif text-cream py-2 border-b border-white/10"
+            className="text-lg font-serif text-cream py-2"
           >
             Orçamento
           </a>
