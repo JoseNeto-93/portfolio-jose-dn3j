@@ -5,7 +5,7 @@ const Hero: React.FC = () => {
   // Mantém as imagens originais, substitui apenas a última quebrada
   // e adiciona logo + desenvolvedor
   const images = [
-    "/carousel/logo-dn3j.png",        // LOGO (destaque)
+    "/carousel/logo.png",        // LOGO (destaque)
     "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=600&h=800",
     "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&q=80&w=600&h=800",
     "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600&h=800",
