@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 
+type CarouselImage = {
+  src: string;
+  type?: 'logo' | 'normal';
+};
+
 const Hero: React.FC = () => {
-  // 3D Carousel images
-  // Mantém as imagens originais, substitui apenas a última quebrada
-  // e adiciona logo + desenvolvedor
-  const images = [
-    "/carousel/logo.png",        // LOGO (destaque)
-    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=600&h=800",
-    "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&q=80&w=600&h=800",
-    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600&h=800",
-    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=600&h=800",
-    "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=600&h=800",
-    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=600&h=800",
-    "/carousel/developer.png",        // Desenvolvedor (substitui imagem quebrada)
+  const images: CarouselImage[] = [
+    { src: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=600&h=800" },
+    { src: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&q=80&w=600&h=800" },
+    { src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600&h=800" },
+    { src: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=600&h=800" },
+    { src: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=600&h=800" },
+    { src: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=600&h=800" },
+
+    // SUBSTITUI imagem quebrada
+    { src: "/carousel/developer.png" },
+
+    // LOGO EM DESTAQUE
+    { src: "/carousel/logo-dn3j.png", type: 'logo' },
   ];
 
   const [rotation, setRotation] = useState(0);
@@ -31,41 +37,40 @@ const Hero: React.FC = () => {
       onMouseMove={handleMouseMove}
       onTouchMove={handleTouchMove}
     >
-      {/* 3D Carousel Background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
         <div className="scale-[0.6] md:scale-100 transition-transform duration-500">
-          <div className="perspective-1000 w-full h-full flex items-center justify-center">
+          <div className="perspective-1000 flex items-center justify-center">
             <div
-              className="preserve-3d relative w-[240px] h-[360px] transition-transform duration-500 ease-out will-change-transform"
+              className="preserve-3d relative w-[240px] h-[360px] transition-transform duration-500 ease-out"
               style={{ transform: `rotateY(${-rotation}deg)` }}
             >
-              {images.map((src, index) => {
-                const isLogo = src.includes('logo-dn3j');
+              {images.map((img, index) => {
+                const isLogo = img.type === 'logo';
 
                 return (
                   <div
                     key={index}
-                    className={`absolute inset-0 rounded-xl overflow-hidden border bg-white/5 backdrop-blur-[2px] shadow-2xl
-                      ${isLogo ? 'border-cream/60 shadow-[0_0_40px_rgba(255,240,200,0.35)]' : 'border-white/20'}
-                    `}
+                    className={`absolute inset-0 rounded-xl overflow-hidden border backdrop-blur-[2px] shadow-2xl
+                      ${isLogo
+                        ? 'border-cream/70 shadow-[0_0_50px_rgba(255,240,200,0.45)]'
+                        : 'border-white/20 bg-white/5'
+                      }`}
                     style={{
                       transform: `
                         rotateY(${index * (360 / images.length)}deg)
                         translateZ(${isLogo ? 650 : 550}px)
-                        scale(${isLogo ? 1.08 : 1})
+                        scale(${isLogo ? 1.1 : 1})
                       `,
                     }}
                   >
                     <img
-                      src={src}
-                      alt="DN3J Portfolio"
+                      src={img.src}
+                      alt="DN3J Carousel"
                       className={`w-full h-full object-cover transition-opacity duration-300
                         ${isLogo ? 'opacity-100' : 'opacity-80 hover:opacity-100'}
                       `}
                     />
-
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   </div>
                 );
               })}
@@ -74,14 +79,14 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* Foreground Content */}
+      {/* Conteúdo principal */}
       <div className="relative z-10 text-center max-w-4xl mx-auto glass-panel p-8 md:p-12 rounded-3xl shadow-2xl">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-cream leading-[1.1] mb-8 opacity-0 animate-fade-in drop-shadow-sm">
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-cream mb-8">
           Construímos o futuro <br />
           <span className="italic font-light text-cream/90">da sua tecnologia</span>
         </h1>
 
-        <p className="text-lg md:text-xl font-sans text-cream/70 max-w-xl mx-auto opacity-0 animate-fade-in [animation-delay:400ms] font-medium">
+        <p className="text-lg md:text-xl font-sans text-cream/70 max-w-xl mx-auto font-medium">
           Soluções digitais sob medida. Transformamos ideias complexas em experiências de software elegantes e funcionais.
         </p>
       </div>
@@ -90,3 +95,4 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
+
